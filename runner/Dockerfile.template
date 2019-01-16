@@ -1,0 +1,24 @@
+############
+# Build step
+############
+FROM balenalib/%%BALENA_MACHINE_NAME%%-golang:1.11-jessie-build as build
+
+# Building as described at https://docs.gitlab.com/runner/development/
+# TODO: use specific version
+RUN    go get -v gitlab.com/gitlab-org/gitlab-runner \
+    && cd $GOPATH/src/gitlab.com/gitlab-org/gitlab-runner/ \
+    && make deps \
+    && make install
+
+#####################
+# Runtime environment
+#####################
+FROM balenalib/%%BALENA_MACHINE_NAME%%-golang:1.11-jessie-run
+
+WORKDIR /usr/src/app
+
+COPY --from=build /go/bin/gitlab-runner /go/bin/gitlab-runner
+
+COPY start.sh ./
+
+CMD ["bash", "start.sh"]

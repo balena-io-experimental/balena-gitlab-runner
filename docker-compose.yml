@@ -1,0 +1,11 @@
+version: '2'
+services:
+  runner:
+    build: ./runner
+    volumes:
+      - runner-config:/etc/gitlab-runner
+    labels:
+      io.balena.features.balena-socket: '1'
+
+volumes:
+  runner-config:
