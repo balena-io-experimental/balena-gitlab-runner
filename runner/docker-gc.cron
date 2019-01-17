@@ -1,0 +1,2 @@
+# m h  dom mon dow   command
+0 * * * * DOCKER=balena-engine REMOVE_VOLUMES=1 MINIMUM_IMAGES_TO_SAVE=1 /usr/bin/docker-gc
