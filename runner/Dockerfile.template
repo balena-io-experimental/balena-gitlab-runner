@@ -21,7 +21,7 @@ FROM balenalib/%%BALENA_MACHINE_NAME%%-golang:1.11-jessie-run
 
 WORKDIR /usr/src/app
 
-RUN install_packages cron
+RUN install_packages cron wget
 
 COPY --from=build /go/bin/gitlab-runner /go/bin/gitlab-runner
 COPY --from=build /src/docker-gc/docker-gc /usr/bin/docker-gc
