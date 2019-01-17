@@ -14,11 +14,6 @@ RUN    go get -v gitlab.com/gitlab-org/gitlab-runner \
 # Grab docker-gc
 RUN git clone https://github.com/spotify/docker-gc.git
 
-# Grab balena-engine
-ENV BALENA_VERSION=v17.12.0
-COPY balena-engine-retrieve.sh ./
-RUN ./balena-engine-retrieve.sh "${BALENA_VERSION}" "%%BALENA_ARCH%%"
-
 #####################
 # Runtime environment
 #####################
@@ -30,7 +25,11 @@ RUN install_packages cron
 
 COPY --from=build /go/bin/gitlab-runner /go/bin/gitlab-runner
 COPY --from=build /src/docker-gc/docker-gc /usr/bin/docker-gc
-COPY --from=build /src/balena-engine/* /usr/bin/
+
+# Grab balena-engine
+ENV BALENA_VERSION=v17.12.0
+COPY balena-engine-retrieve.sh ./
+RUN ./balena-engine-retrieve.sh "${BALENA_VERSION}" "%%BALENA_ARCH%%"
 
 COPY docker-gc.cron ./
 COPY docker-gc-exclude* /etc/

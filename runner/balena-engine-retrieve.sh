@@ -31,3 +31,6 @@ RELEASE_FILENAME="balena-engine-${VERSION}-${ARCH}.tar.gz"
 wget --tries=3 --no-verbose "${RELEASE_URL}/${VERSION}/${RELEASE_FILENAME}"
 
 tar xzvf "${RELEASE_FILENAME}"
+echo "Copying balena-engine to the path"
+mv balena-engine/* /usr/bin
+rm -rf balena-engine

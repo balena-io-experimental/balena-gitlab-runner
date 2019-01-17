@@ -1,2 +1,3 @@
-# m h  dom mon dow   command
-0 * * * * DOCKER=balena-engine REMOVE_VOLUMES=1 MINIMUM_IMAGES_TO_SAVE=1 /usr/bin/docker-gc
+# See the meaning of the provided vars at https://github.com/spotify/docker-gc#manual-usage
+# m   h   dom mon dow   command
+  0   *   *   *   *     DOCKER=balena-engine REMOVE_VOLUMES=1 FORCE_CONTAINER_REMOVAL=1 /usr/bin/docker-gc > /var/log/docker-gc.log
