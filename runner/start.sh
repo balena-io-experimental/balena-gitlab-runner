@@ -2,6 +2,7 @@
 
 echo "Setting up docker garbage collection job."
 crontab docker-gc.cron
+service cron start
 
 if [ -f "/etc/gitlab-runner/config.toml" ]; then
   echo "Configuration found, starting runner"
