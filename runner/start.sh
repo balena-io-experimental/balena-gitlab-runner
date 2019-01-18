@@ -11,28 +11,35 @@ function gitlab-runner-register-and-run() {
   if [ -n "$GITLAB_DESCRIPTION" ]; then
     REGISTER_ARGS+=(--description "$GITLAB_DESCRIPTION")
   else
+    # By default, use the short UUID of the device to descripe it
     REGISTER_ARGS+=(--description "${BALENA_DEVICE_UUID:0:7}")
   fi
 
   if [ -n "$GITLAB_DEFAULT_IMAGE" ]; then
     REGISTER_ARGS+=(--docker-image "${GITLAB_DEFAULT_IMAGE}")
   else
+    # If no default image is supplied, use the device type's Debian image
     REGISTER_ARGS+=(--docker-image "balenalib/${BALENA_DEVICE_TYPE}-debian")
   fi
 
-  local tags=''
+  # Collecting all the tags, tagging `docker` first, as that's the executor
+  local tags='docker,'
   if [ "${TAG_ARCHITECTURE:-yes}" = "yes" ]; then
+    # Architecture tag, such as aarch64, armv7l, x86_64, ...
     local arch
     arch=$(uname -m)
     tags="${tags}${arch},"
   fi
   if [ "${TAG_DEVICE_TYPE:-yes}" = "yes" ]; then
+    # The balena device type, such as raspberrypi3, intel-nuc, ...
     tags="${tags}${BALENA_DEVICE_TYPE},"
   fi
   if [ "${TAG_BALENA:-yes}" = "yes" ]; then
+    # Apply tag to signify that this device is a balena device
     tags="${tags}balena,"
   fi
   if [ -n "$GITLAB_TAGS" ]; then
+    # Any other set tag, a string with comma separation
     tags="${tags}${GITLAB_TAGS}"
   fi
   REGISTER_ARGS+=(--tag-list "${tags}")
