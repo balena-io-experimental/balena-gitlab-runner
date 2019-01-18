@@ -21,6 +21,11 @@ function gitlab-runner-register-and-run() {
   fi
 
   local tags=''
+  if [ "${TAG_ARCHITECTURE:-yes}" = "yes" ]; then
+    local arch
+    arch=$(uname -m)
+    tags="${tags}${arch},"
+  fi
   if [ "${TAG_DEVICE_TYPE:-yes}" = "yes" ]; then
     tags="${tags}${BALENA_DEVICE_TYPE},"
   fi
