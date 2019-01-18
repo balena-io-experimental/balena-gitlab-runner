@@ -33,15 +33,15 @@ function gitlab-runner-register-and-run() {
   REGISTER_ARGS+=(--tag-list "${tags}")
 
   if [ "${GITLAB_RUN_UNTAGGED:-yes}" = "yes" ]; then
-    REGISTER_ARGS+=(--run-untagged true)
+    REGISTER_ARGS+=(--run-untagged=true)
   else
-    REGISTER_ARGS+=(--run-untagged false)
+    REGISTER_ARGS+=(--run-untagged=false)
   fi
 
   if [ "${GITLAB_LOCKED:-yes}" = "yes" ]; then
-    REGISTER_ARGS+=(--locked true)
+    REGISTER_ARGS+=(--locked=true)
   else
-    REGISTER_ARGS+=(--locked false)
+    REGISTER_ARGS+=(--locked=false)
   fi
 
   echo "Registering runner with these arguments:" "${REGISTER_ARGS[@]}"
