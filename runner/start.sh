@@ -33,10 +33,12 @@ function gitlab-runner-register-and-run() {
   REGISTER_ARGS+=(--tag-list "${tags}")
 
   if [ "${GITLAB_RUN_UNTAGGED:-yes}" = "yes" ]; then
-    REGISTER_ARGS+=(--run-untagged)
+    REGISTER_ARGS+=(--run-untagged true)
+  else
+    REGISTER_ARGS+=(--run-untagged false)
   fi
 
-  if [ "${GITLAB_RUN_LOCKED:-true}" = "true" ]; then
+  if [ "${GITLAB_LOCKED:-yes}" = "yes" ]; then
     REGISTER_ARGS+=(--locked true)
   else
     REGISTER_ARGS+=(--locked false)
