@@ -6,8 +6,8 @@ function gitlab-runner-register-and-run() {
   # Default 'gitlab-runner register' flags for the balena runner
   REGISTER_ARGS+=(--non-interactive)
   REGISTER_ARGS+=(--executor "docker")
-  REGISTER_ARGS+=(--url "$GITLAB_URL")
   REGISTER_ARGS+=(--registration-token "$GITLAB_TOKEN")
+  REGISTER_ARGS+=(--url "${GITLAB_URL:-https://gitlab.com/}")
   if [ -n "$GITLAB_DESCRIPTION" ]; then
     REGISTER_ARGS+=(--description "$GITLAB_DESCRIPTION")
   else
@@ -69,10 +69,10 @@ function main() {
   if [ -f "/etc/gitlab-runner/config.toml" ]; then
     echo "Configuration found, starting runner"
     gitlab-runner run
-  elif [ -n "$GITLAB_URL" ] && [ -n "$GITLAB_TOKEN" ]; then
+  elif [ -n "$GITLAB_TOKEN" ]; then
     gitlab-runner-register-and-run
   else
-    echo "Configuration not found, nor GITLAB_URL/GITLAB_TOKEN set for automatic registration."
+    echo "Configuration not found, nor GITLAB_TOKEN set for automatic registration."
     echo "Please run 'gitlab-runner register' from the container!"
   fi
 
