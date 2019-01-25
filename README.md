@@ -1,7 +1,5 @@
 # gitlab-runner on balenaOS devices
 
-**Work in Progress**
-
 [GitLab runners][runners] are worker nodes to run your tests in a GitLab CI/CD
 environment. This project aims to help you deploy these runners on physical
 hardware on balenaOS devices.
@@ -15,9 +13,9 @@ Features:
 * automatic docker image/container garbage collection using
   [docker-gc][docker-gc] by Spotify.
 
-## Getting Started
+Discuss this project in the [forums][forums]!
 
-**Work in progress instructions.**
+## Getting Started
 
 If using balenaCloud, follow the [getting started guide][getting started] for
 your desired device type, to see how to register (if you haven't yet), and how
@@ -79,6 +77,7 @@ balenaCloud) or `balena local ssh $UUID` (on openbalena), and check out
 [cli]: https://github.com/balena-io/balena-cli "balena CLI on GitHub"
 [config]: https://docs.gitlab.com/ee/ci/runners/README.html "Configuring GitLab Runners"
 [docker-gc]: https://github.com/spotify/docker-gc/ "docker-gc on GitHub"
+[forums]: https://forums.balena.io/t/gitlab-runner-on-balena-devices-for-continuous-integration-testing/5090
 [getting started]: https://www.balena.io/docs/learn/getting-started/raspberrypi3/go/ "Raspberry Pi 3 - golang getting started"
 [openbalena]: https://www.balena.io/open/ "openbalena home page"
 [runners]: https://docs.gitlab.com/runner/ "GitLab Runner"
