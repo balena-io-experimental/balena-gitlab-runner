@@ -7,7 +7,7 @@ WORKDIR /src
 
 # Building as described at https://docs.gitlab.com/runner/development/
 # Change this env var to a desired version tag, or set to "master" (YMMV)
-ENV GITLAB_VERSION=v11.6.1
+ENV GITLAB_VERSION=v11.10.1
 RUN    go get -v gitlab.com/gitlab-org/gitlab-runner \
     && cd "${GOPATH}/src/gitlab.com/gitlab-org/gitlab-runner/" \
     && git checkout "${GITLAB_VERSION}" \
