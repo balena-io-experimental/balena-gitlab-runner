@@ -46,7 +46,7 @@ with. These help setting up your first runner automatically:
   etc). Left empty defaults to `yes`, and any other value will prevent this tag
   being added.
 * `TAG_DEVICE_TYPE`: *optional*,  whether or not create the runner with tag
-  showing the balena device type (i.e. `raspberrypi3`, 'intel-nuc', etc). Left
+  showing the balena device type (i.e. `raspberrypi3`, `intel-nuc`, etc). Left
   empty defaults to `yes`, and any other value will prevent this tag being added.
 * `TAG_BALENA`: *optional*, whether or not tag the runner with the `balena` tag,
   thus showing clearly what are balena devices among your runners, if there are
