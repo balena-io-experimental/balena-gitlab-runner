@@ -1,3 +1,4 @@
-registry2.balena-cloud.com
-registry2.balena-staging.com
+registry2.balena-cloud.com.*
+registry2.balena-staging.com.*
+gitlab/gitlab-runner-helper:.*
 <none>
