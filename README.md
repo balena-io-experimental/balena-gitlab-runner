@@ -62,6 +62,14 @@ with. These help setting up your first runner automatically:
   project. Left empty defaults to `yes` (locked to a project), any other value
   makes it default unlocked. You can also change this on your runner
   configuration page.
+* `GITLAB_RUNNER_HELPER_IMAGE`: *optional*, to set a different helper image to
+  use with the runner. For more information, check the [relevant GitLab logs][runner-helper].
+  This is a registration-time setting, so changing the value won't change an already registered
+  runner For x86 32-bit runners, GitLab doesn't provide runner helper images, but we have
+  some custom builds available at `imrehg/gitlab-runner-helper:i386-${CI_RUNNER_VERSION}`
+  and that value is automatically applied for 32-bit runners (such as Intel Edison).
+  It's custom work based on a patched version of the upstream GitLab runners (see the
+  [i386 branch of our fork][gitlab-runner-fork]), thus your milage may vary.
 
 See more information at the [Configuring GitLab Runners docs][config]. The
 configuration file is also available to edit.
@@ -79,5 +87,7 @@ balenaCloud) or `balena local ssh $UUID` (on openbalena), and check out
 [docker-gc]: https://github.com/spotify/docker-gc/ "docker-gc on GitHub"
 [forums]: https://forums.balena.io/t/gitlab-runner-on-balena-devices-for-continuous-integration-testing/5090
 [getting started]: https://www.balena.io/docs/learn/getting-started/raspberrypi3/go/ "Raspberry Pi 3 - golang getting started"
+[gitlab-runner-fork]: https://gitlab.com/imrehg/gitlab-runner/tree/i386 "GitLab Runners repo fork with i386 modifications"
 [openbalena]: https://www.balena.io/open/ "openbalena home page"
 [runners]: https://docs.gitlab.com/runner/ "GitLab Runner"
+[runner-helper]: https://docs.gitlab.com/runner/configuration/advanced-configuration.html#helper-image "Advanced configuration: Helper image"

@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Set default i386 runner helper image, but available to be overriden
+GITLAB_DEFAULT_I386_RUNNER_HELPER_IMAGE="imrehg/gitlab-runner-helper:i386-\${CI_RUNNER_VERSION}"
+GITLAB_I386_RUNNER_HELPER_IMAGE="${GITLAB_I386_RUNNER_HELPER_IMAGE:-${GITLAB_DEFAULT_I386_RUNNER_HELPER_IMAGE}}"
+
 function gitlab-runner-register-and-run() {
   local REGISTER_ARGS=()
 
@@ -21,6 +25,21 @@ function gitlab-runner-register-and-run() {
     # If no default image is supplied, use the device type's Debian image
     REGISTER_ARGS+=(--docker-image "balenalib/${BALENA_DEVICE_TYPE}-debian")
   fi
+
+  if [ -n "$GITLAB_RUNNER_HELPER_IMAGE" ]; then
+    REGISTER_ARGS+=(--docker-helper-image "${GITLAB_RUNNER_HELPER_IMAGE}")
+  else
+    # If no image supplied, check if we are on x86 (32-bit), as it needs custom image,
+    # as GitLab doesn't provide their own for this architecture at the moment
+    local arch
+    arch=$(uname -m)
+    case "${arch}" in
+      i?86)
+        REGISTER_ARGS+=(--docker-helper-image "${GITLAB_I386_RUNNER_HELPER_IMAGE}")
+        ;;
+    esac
+  fi
+
 
   # Collecting all the tags, tagging `docker` first, as that's the executor
   local tags='docker,'
