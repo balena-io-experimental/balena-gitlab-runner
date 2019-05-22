@@ -43,4 +43,12 @@ COPY docker-gc.cron ./
 COPY docker-gc-exclude* /etc/
 COPY start.sh ./
 
+RUN case "%%BALENA_MACHINE_NAME%%" in \
+      raspberry-pi) \
+        echo "Install official docker as opposed to balena-engine for this device (workaround)" && \
+        curl -sSL https://get.docker.com | sh && \
+        sed -i 's/DOCKER=balena-engine/DOCKER=docker/' docker-gc.cron \
+        ;; \
+    esac
+
 CMD ["bash", "start.sh"]
