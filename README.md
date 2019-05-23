@@ -70,6 +70,9 @@ with. These help setting up your first runner automatically:
   and that value is automatically applied for 32-bit runners (such as Intel Edison).
   It's custom work based on a patched version of the upstream GitLab runners (see the
   [i386 branch of our fork][gitlab-runner-fork]), thus your milage may vary.
+* `DEBUG`: *optional*, set it to any value to enable certain debug/diagnostics functionality,
+  see the code in more details. One current example is keeping all garbage collection
+  logs on the device (instead of just the last one)
 
 See more information at the [Configuring GitLab Runners docs][config]. The
 configuration file is also available to edit.
