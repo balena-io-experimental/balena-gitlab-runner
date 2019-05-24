@@ -1,2 +1,3 @@
 resin_supervisor
 runner_.*_.*
+runner-.*
