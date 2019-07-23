@@ -21,5 +21,5 @@ touch "${LOGFILE}"
    $DOCKER ps -a
    echo "Garbage Collection Log:"
    # See the meaning of the different settings at https://github.com/spotify/docker-gc/blob/master/README.md#manual-usage
-   REMOVE_VOLUMES=1 FORCE_IMAGE_REMOVAL=1 /usr/bin/docker-gc
+   REMOVE_VOLUMES=1 FORCE_IMAGE_REMOVAL=1 MINIMUM_IMAGES_TO_SAVE=3 /usr/bin/docker-gc
 } >> "${LOGFILE}" 2>&1
